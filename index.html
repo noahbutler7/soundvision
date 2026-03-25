@@ -749,11 +749,14 @@ Respond ONLY with valid JSON — no markdown, no explanation:
     "grain": 0.0-1.0
   }
 }`;
-    const res=await fetch('https://api.anthropic.com/v1/messages',{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({ model:'claude-sonnet-4-20250514', max_tokens:1000, messages:[{role:'user',content:prompt}] })
-    });
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+    'x-api-key': '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',
+    'anthropic-version': '2023-06-01',
+    'anthropic-dangerous-direct-browser-access': 'true',
+  },
     const data=await res.json();
     const raw=data.content.map(b=>b.text||'').join('');
     const artData=JSON.parse(raw.replace(/```json|```/g,'').trim());
